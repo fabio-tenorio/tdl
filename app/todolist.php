@@ -29,15 +29,15 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="app/todolist.php">My todo list</a>
+                        <a class="nav-link active" href="todolist.php">My todo list</a>
                     </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Members
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="app/connexion.php">sign in</a></li>
-                        <li><a class="dropdown-item" href="app/inscription.php">sign up</a></li>
+                        <li><a class="dropdown-item" href="connexion.php">sign in</a></li>
+                        <li><a class="dropdown-item" href="inscription.php">sign up</a></li>
                     </ul>
                     </li>
                     <li class="nav-item">
@@ -61,10 +61,10 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
     <main class="tdl_main">
         <div class="circle"></div>
         <h1 class="task span-12">main</h1>
-        <div class="task span-6">task 1</div>
-        <div class="task span-4">task 2</div>
-        <div class="task span-8">task 3</div>
-        <div class="task span-2">task 4</div>
+        <div class="task span-6">To do</div>
+        <div class="task span-4">Doing</div>
+        <div class="task span-8">Done</div>
+        <div id="new" class="task span-2">new</div>
     </main>
     <aside class="tdl_right_aside">
         right side

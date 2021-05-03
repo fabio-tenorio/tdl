@@ -2,7 +2,12 @@
 de créer un compte et de s’y connecter. -->
 <?php
 session_start();
-var_dump($_SESSION['user']);
+if (isset($_POST['disconnect'])) {
+    session_destroy();
+    header('location: index.php');
+}
+var_dump($_SERVER['REQUEST_URI']);
+// var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,7 +22,7 @@ var_dump($_SESSION['user']);
     <header id="index-header">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" id="logo" href="#">pomodoro</a>
+                <a class="navbar-brand" id="logo" href="index.php">pomodoro</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -26,6 +31,14 @@ var_dump($_SESSION['user']);
                     <li class="nav-item">
                         <a class="nav-link active" href="app/todolist.php">My todo list</a>
                     </li>
+                    <?php if (isset($_SESSION['user'])) { ?>
+                    <li class="nav-item">
+                        <p>Hello, <?= $_SESSION['user']->login; ?> !</p>
+                    </li>
+                    <form action="" method="post">
+                        <button class="btn btn-warning" type="submit" id="disconnect" name="disconnect">sign out</button>
+                    </form>
+                    <?php } else { ?>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Members
@@ -35,6 +48,7 @@ var_dump($_SESSION['user']);
                         <li><a class="dropdown-item" href="app/inscription.php">sign up</a></li>
                     </ul>
                     </li>
+                    <?php } ?>
                     <li class="nav-item">
                     <a class="nav-link active" target="_blank" aria-current="page" href="https://en.wikipedia.org/wiki/Pomodoro_Technique">The technique</a>
                     </li>
@@ -88,6 +102,8 @@ var_dump($_SESSION['user']);
             <a class="text-white" href="#">Fabio Tenorio de Carvalho</a>
         </div>
     </footer>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
