@@ -19,10 +19,10 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
     <title>flowing | my todolist</title>
 </head>
 <body class="tdl_parent">
-    <header class="tdl_header">
+    <header class="tdl_header bg-danger">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" id="logo" href="#">pomodoro</a>
+                <a class="navbar-brand" id="logo" href="index.php">pomodoro</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -56,15 +56,15 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
         </nav>
     </header>
     <aside class="tdl_left_aside">
-        left side
+        <button id="createNewList">add new list</button>
     </aside>
-    <main class="tdl_main">
-        <div class="circle"></div>
-        <h1 class="task span-12">main</h1>
-        <div class="task span-6">To do</div>
-        <div class="task span-4">Doing</div>
-        <div class="task span-8">Done</div>
-        <div id="new" class="task span-2">new</div>
+    <main class="tdl_main" id="tdl-area">
+        <!-- <div class="circle"></div> -->
+        <!-- <h1 class="task span-12">main</h1> -->
+        <!-- <div class="task span-6">To do</div> -->
+        <!-- <div class="task span-4">Doing</div> -->
+        <!-- <div class="task span-8">Done</div> -->
+        <!-- <div id="new" class="task span-2">new</div> -->
     </main>
     <aside class="tdl_right_aside">
         right side
@@ -72,6 +72,7 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
     <footer class="tdl_footer">
         footer
     </footer>
+    <script type="text/javascript" src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

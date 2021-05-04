@@ -6,7 +6,7 @@ if (isset($_POST['disconnect'])) {
     session_destroy();
     header('location: index.php');
 }
-var_dump($_SERVER['REQUEST_URI']);
+// var_dump($_SERVER['REQUEST_URI']);
 // var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
@@ -65,12 +65,8 @@ var_dump($_SERVER['REQUEST_URI']);
         </nav>
     </header>
     <main id="index-main">
-        <section id="index-section">
-            <h1>get things done</h1>
-        </section>
-        <section>
-
-        </section>
+        <h1>get things done</h1>
+        <img src="images/pomodoro-bg.jpg" alt="pomodoro background">
     </main>
     <footer id="index-footer" class="bg-light text-center text-dark">
         <div class="container p-4 pb-0">
@@ -104,6 +100,6 @@ var_dump($_SERVER['REQUEST_URI']);
     </footer>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="app/script.js"></script>
 </body>
 </html>
