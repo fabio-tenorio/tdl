@@ -9,6 +9,8 @@ de la date à laquelle elle a été accomplie.
 A l’exception du bouton de déconnexion, aucune des actions possibles sur
 la page “todolist.php” ne doit entraîner un rechargement de la page. -->
 
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,24 +24,20 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
     <header class="tdl_header bg-danger">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" id="logo" href="index.php">pomodoro</a>
+                <a class="navbar-brand" id="logo" href="../index.php">pomodoro</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <?php if (isset($_SESSION['user'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link active" href="todolist.php">My todo list</a>
+                        <p>Hello, <?= $_SESSION['user']->login; ?> !</p>
                     </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Members
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="connexion.php">sign in</a></li>
-                        <li><a class="dropdown-item" href="inscription.php">sign up</a></li>
-                    </ul>
-                    </li>
+                    <form action="" method="post">
+                        <button class="btn btn-warning" type="submit" id="disconnect" name="disconnect">sign out</button>
+                    </form>
+                    <?php } ?>
                     <li class="nav-item">
                     <a class="nav-link active" target="_blank" aria-current="page" href="https://en.wikipedia.org/wiki/Pomodoro_Technique">The technique</a>
                     </li>
@@ -59,12 +57,13 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
         <button id="createNewList">add new list</button>
     </aside>
     <main class="tdl_main" id="tdl-area">
-        <!-- <div class="circle"></div> -->
-        <!-- <h1 class="task span-12">main</h1> -->
-        <!-- <div class="task span-6">To do</div> -->
-        <!-- <div class="task span-4">Doing</div> -->
-        <!-- <div class="task span-8">Done</div> -->
-        <!-- <div id="new" class="task span-2">new</div> -->
+
+        <!-- <div class="circle"></div>
+        <h1 class="task span-12">main</h1>
+        <div class="task span-6">To do</div>
+        <div class="task span-4">Doing</div>
+        <div class="task span-8">Done</div>
+        <div id="new" class="task span-2">new</div> -->
     </main>
     <aside class="tdl_right_aside">
         right side
@@ -72,7 +71,8 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
     <footer class="tdl_footer">
         footer
     </footer>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

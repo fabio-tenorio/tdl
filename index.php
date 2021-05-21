@@ -6,8 +6,6 @@ if (isset($_POST['disconnect'])) {
     session_destroy();
     header('location: index.php');
 }
-// var_dump($_SERVER['REQUEST_URI']);
-// var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,42 +22,42 @@ if (isset($_POST['disconnect'])) {
             <div class="container-fluid">
                 <a class="navbar-brand" id="logo" href="index.php">pomodoro</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="app/todolist.php">My todo list</a>
-                    </li>
-                    <?php if (isset($_SESSION['user'])) { ?>
-                    <li class="nav-item">
-                        <p>Hello, <?= $_SESSION['user']->login; ?> !</p>
-                    </li>
-                    <form action="" method="post">
-                        <button class="btn btn-warning" type="submit" id="disconnect" name="disconnect">sign out</button>
-                    </form>
-                    <?php } else { ?>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Members
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="app/connexion.php">sign in</a></li>
-                        <li><a class="dropdown-item" href="app/inscription.php">sign up</a></li>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <?php if (isset($_SESSION['user'])) { ?>
+                        <li class="nav-item">
+                            <p>Hello, <?= $_SESSION['user']->login; ?> !</p>
+                        </li>
+                        <form action="" method="post">
+                            <button class="btn btn-warning" type="submit" id="disconnect" name="disconnect">sign out</button>
+                        </form>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="app/todolist.php">My todo list</a>
+                        </li>
+                        <?php } else { ?>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Members
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="app/connexion.php">sign in</a></li>
+                            <li><a class="dropdown-item" href="app/inscription.php">sign up</a></li>
+                        </ul>
+                        </li>
+                        <?php } ?>
+                        <li class="nav-item">
+                        <a class="nav-link active" target="_blank" aria-current="page" href="https://en.wikipedia.org/wiki/Pomodoro_Technique">The technique</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="#">About us</a>
+                        </li>
                     </ul>
-                    </li>
-                    <?php } ?>
-                    <li class="nav-item">
-                    <a class="nav-link active" target="_blank" aria-current="page" href="https://en.wikipedia.org/wiki/Pomodoro_Technique">The technique</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" href="#">About us</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
