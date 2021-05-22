@@ -4,12 +4,19 @@ doit être possible, avec un bouton ou autre, de spécifier qu’une tâche
 a été accomplie ou annulée. Cette tâche doit être retirée de la liste
 - Une liste des tâches accomplies ou chaque tâche est accompagnée
 de la date à laquelle elle a été accomplie.
-- Un input permettant de créer une tâche.
-- Un bouton de déconnexion permettant de... se déconnecter.
+- Un input permettant de créer une tâche. OK
+- Un bouton de déconnexion permettant de... se déconnecter. OK
 A l’exception du bouton de déconnexion, aucune des actions possibles sur
 la page “todolist.php” ne doit entraîner un rechargement de la page. -->
 
-<?php session_start() ?>
+<?php session_start();
+
+if (isset($_POST['disconnect'])) {
+    session_destroy();
+    header('Location: ../index.php');
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,8 +60,8 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
             </div>
         </nav>
     </header>
-    <aside class="tdl_left_aside">
-        <button id="createNewList">add new list</button>
+    <aside class="tdl_left_aside mx-3">
+        <button class="btn btn-primary" id="createNewTask">add new list</button>
     </aside>
     <main class="tdl_main" id="tdl-area">
 
@@ -65,7 +72,7 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
         <div class="task span-8">Done</div>
         <div id="new" class="task span-2">new</div> -->
     </main>
-    <aside class="tdl_right_aside">
+    <aside class="tdl_right_aside mx-3">
         right side
     </aside>
     <footer class="tdl_footer">

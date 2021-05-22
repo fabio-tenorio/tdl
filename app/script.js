@@ -3,21 +3,34 @@ quando clico no botão addNewList, o evento executado é criar uma caixa com as 
 input para o título e impressão da data corrente 
 
 */
-let createListButton = document.getElementById('createNewList');
-let newTask = document.createElement('textarea');
-
+let createListButton = document.getElementById('createNewTask');
 let taskDate = new Date();
 let day = taskDate.getDay() + 2;
 let month = taskDate.getMonth() + 1;
 createListButton.addEventListener("click", function() {
     let tdlArea = document.getElementById('tdl-area');
-    let newList = document.createElement('div');
-    newList.classList.add('task');
-    let title = document.createElement('input');
-    title.type = "text";
-    newList.appendChild(title);
+    let newTask = document.createElement('div');
+    newTask.classList.add('task');
+    let taskTitle = document.createElement('input');
+    taskTitle.type = "text";
+    let taskDesc = document.createElement('textarea');
     let date = day + "/" + month + "/" + taskDate.getFullYear();
-    tdlArea.appendChild(newList);
+    let showDate = document.createElement('p');
+    let taskDone = document.createElement('button');
+    taskDone.type = "submit";
+    taskDone.innerText = "accomplished";
+    taskDone.setAttribute("class", "btn btn-warning");
+    let taskCancel = document.createElement('button');
+    taskCancel.type = "submit";
+    taskCancel.innerText = "cancel task";
+    taskCancel.setAttribute("class", "btn btn-danger");
+    tdlArea.appendChild(newTask);
+    newTask.appendChild(taskTitle);
+    newTask.appendChild(taskDesc);
+    newTask.appendChild(taskDone);
+    newTask.appendChild(taskCancel);
+    newTask.appendChild(showDate);
+    showDate.innerHTML = date;
 })
 
 // createNewList.addEventListener('click', addNewList);
