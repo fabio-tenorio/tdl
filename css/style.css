@@ -139,11 +139,41 @@ body {
     margin: 2rem;
     width: 35vh;
     min-height: 45vh;
+    max-height: 55vh;
     border-radius: 5px;
     padding: 25px;
     background: white;
     background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
     backdrop-filter: blur(2rem);
+}
+
+.task-title {
+    border: none;
+    background-color: inherit;
+    border-bottom: 1px solid darkblue;
+    font-weight: bold;
+}
+
+.task-title:focus {
+    border: none;
+    outline: none;
+}
+
+.task-desc {
+    background-color: azure;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    resize: none;
+    padding: 5px;
+}
+
+.task-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .span-12 {

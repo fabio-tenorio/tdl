@@ -11,8 +11,14 @@ la page “todolist.php” ne doit entraîner un rechargement de la page. -->
 
 <?php session_start();
 
+require_once 'db.php';
+
 if (isset($_POST['disconnect'])) {
     session_destroy();
+    header('Location: ../index.php');
+}
+
+if (!isset($_SESSION['user'])) {
     header('Location: ../index.php');
 }
 
@@ -24,6 +30,7 @@ if (isset($_POST['disconnect'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <title>flowing | my todolist</title>
 </head>
@@ -61,7 +68,7 @@ if (isset($_POST['disconnect'])) {
         </nav>
     </header>
     <aside class="tdl_left_aside mx-3">
-        <button class="btn btn-primary" id="createNewTask">add new list</button>
+        <button class="btn btn-primary" id="createNewTask">add new task</button>
     </aside>
     <main class="tdl_main" id="tdl-area">
 
