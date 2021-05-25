@@ -4,8 +4,13 @@
 session_start();
 require_once 'db.php';
 $db = new db;
+
 if (isset($_POST['signin'])) {
-    $_SESSION['user'] = $db->signIn($_POST);
+    if ($db->signIn($_POST)===false) {
+        echo "<p class=\"btn btn-warning my-5\">you shall sign up first</p>";
+    } else {
+        $_SESSION['user'] = $db->signIn($_POST); 
+    }
 }
 
 if (isset($_SESSION['user'])) {
@@ -19,6 +24,7 @@ if (isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
     <title>pomodoro | my todolist</title>

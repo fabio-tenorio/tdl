@@ -4,18 +4,11 @@ input para o título e impressão da data corrente
 */
 let createListButton = document.getElementById('createNewTask');
 
-function convertDate(timestamp) {
-    let miliseconds = timestamp * 1000;
-    let date = new Date(miliseconds);
-    let humanReadable = date.toLocaleString("fr-FR", {weekday: "long"});
-    return humanReadable;
-}
-
 createListButton.addEventListener("click", () => {
         // criar um loop para atribuir uma id à task e aos items da task em $_POST;
-        const taskDate = new Date();
-        const timestamp = taskDate.getTime();
-        let date = convertDate(timestamp);
+        let taskDate = new Date();
+        taskDate = taskDate.toISOString().slice(0, 19).replace('T', ' ');
+        // taskDate = taskDate.toLocaleString('en-GR');
 
         let tdlArea = document.getElementById('tdl-area');
         let newTask = document.createElement('div');
@@ -66,12 +59,17 @@ createListButton.addEventListener("click", () => {
         newTask.appendChild(saveTask);
         newTask.appendChild(container);
         newTask.appendChild(showDate);
-        showDate.innerHTML = date;
+        showDate.innerHTML = taskDate;
 
         saveTask.addEventListener("click", function () {
             var title = $("#tasktitle").val();
             var desc = $("#taskdesc").val();
-            var done = $("#taskdone").val();
+            if ($("#taskdone").val()=="") {
+                var done = null;
+            } else {
+                var done = $("#taskdone").val();
+            }
+            
             var date = $("#taskdate").val();
             $.ajax({
                 url: "saveTask.php",
@@ -79,13 +77,13 @@ createListButton.addEventListener("click", () => {
                 data: {
                     title: title,
                     description: desc,
-                    created: date,
+                    created: taskDate,
                     done: done
                 },
                 cache: false,
                 success: (result) => {
                     console.log(result);
-                    result = JSON.parse(result);
+                    // result = JSON.parse(result);
                     if (result.statusCode == 200) {
                         $("#success").show();
                         $("#success").html('Data added');

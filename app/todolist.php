@@ -20,6 +20,9 @@ if (isset($_POST['disconnect'])) {
 
 if (!isset($_SESSION['user'])) {
     header('Location: ../index.php');
+} else {
+    $db = new db;
+    $tasks = $db->selectTasks($_SESSION['user']->id);
 }
 
 ?>
@@ -71,13 +74,18 @@ if (!isset($_SESSION['user'])) {
         <button class="btn btn-primary" id="createNewTask">add new task</button>
     </aside>
     <main class="tdl_main" id="tdl-area">
-
-        <!-- <div class="circle"></div>
-        <h1 class="task span-12">main</h1>
-        <div class="task span-6">To do</div>
-        <div class="task span-4">Doing</div>
-        <div class="task span-8">Done</div>
-        <div id="new" class="task span-2">new</div> -->
+        <?php
+        foreach($tasks as $value) { ?>
+            <div class="task">
+                <p class="task-title"><?=$value->title;?></p>
+                <p class="task-desc"><?=$value->description;?></p>
+                <div class="d-flex-row">
+                    <button class="btn col-6 btn-success" type="submit" id="done#<?$value->id;?>">done</button>
+                    <button class="btn col-6 btn-danger" type="submit" id="cancel#<?$value->id;?>">cancel</button>
+                </div>
+            </div>
+        <?php }
+        ?>
     </main>
     <aside class="tdl_right_aside mx-3">
         right side

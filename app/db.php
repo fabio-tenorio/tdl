@@ -23,10 +23,9 @@ class db {
         }
     }
 
-    public function selectAll($table)
+    public function selectTasks($id)
     {   
-        $sql = $this->connect_db()->prepare("SELECT * FROM $table");
-        // $sql->bindParam(':table', $table);
+        $sql = $this->connect_db()->prepare("SELECT * FROM `tasks` WHERE id_user=$id");
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -51,8 +50,12 @@ class db {
         // $password = $data['password'];
         $sql = $this->connect_db()->prepare("SELECT * FROM `users` WHERE login=:login");
         $sql->execute([':login'=>$login]);
-        $this->user = $sql->fetch(\PDO::FETCH_OBJ);
-        return $this->user;
+        if ($sql->execute([':login'=>$login])) {
+            $this->user = $sql->fetch(\PDO::FETCH_OBJ);
+            return $this->user;
+        } else {
+            return false;
+        }
     }
 
     public function selectOneTask($id) {
