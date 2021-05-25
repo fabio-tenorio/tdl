@@ -4,11 +4,18 @@ input para o título e impressão da data corrente
 */
 let createListButton = document.getElementById('createNewTask');
 
+function convertDate(timestamp) {
+    let miliseconds = timestamp * 1000;
+    let date = new Date(miliseconds);
+    let humanReadable = date.toLocaleString("fr-FR", {weekday: "long"});
+    return humanReadable;
+}
+
 createListButton.addEventListener("click", () => {
         // criar um loop para atribuir uma id à task e aos items da task em $_POST;
         const taskDate = new Date();
         const timestamp = taskDate.getTime();
-        console.log(timestamp);
+        let date = convertDate(timestamp);
 
         let tdlArea = document.getElementById('tdl-area');
         let newTask = document.createElement('div');
@@ -25,7 +32,6 @@ createListButton.addEventListener("click", () => {
         taskDesc.id = "taskdesc";
         taskDesc.placeholder = "details";
 
-        let date = `${day}/${month}/${taskDate.getFullYear()}`;
         let showDate = document.createElement('p');
         showDate.id = "taskdate";
 
