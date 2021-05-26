@@ -3,12 +3,11 @@ quando clico no botão addNewList, o evento executado é criar uma caixa com as 
 input para o título e impressão da data corrente 
 */
 let createListButton = document.getElementById('createNewTask');
+let doneButtons = document.querySelectorAll('.btn-success');
 
 createListButton.addEventListener("click", () => {
-        // criar um loop para atribuir uma id à task e aos items da task em $_POST;
         let taskDate = new Date();
         taskDate = taskDate.toISOString().slice(0, 19).replace('T', ' ');
-        // taskDate = taskDate.toLocaleString('en-GR');
 
         let tdlArea = document.getElementById('tdl-area');
         let newTask = document.createElement('div');
@@ -82,8 +81,6 @@ createListButton.addEventListener("click", () => {
                 },
                 cache: false,
                 success: (result) => {
-                    console.log(result);
-                    // result = JSON.parse(result);
                     if (result.statusCode == 200) {
                         $("#success").show();
                         $("#success").html('Data added');
@@ -95,68 +92,6 @@ createListButton.addEventListener("click", () => {
         });
     });
 
+     
 
-// buttonSaveTask.addEventListener("click", function() {
-//     let title = document.getElementById("tasktitle");
-//     let desc = document.getElementById("taskdesc");
-//     let done = document.getElementById("taskdone");
-//     let date = document.getElementById("taskdate");
-//     $.ajax({
-//         url: "saveTask.php",
-//         type: "POST",
-//         data: {
-//             title: title,
-//             description: desc,
-//             created: date,
-//             done: done
-//         },
-//         cache: false,
-//         success: function(result) {
-//             var result = JSON.parse(result);
-//             if (result.statusCode==200) {
-//                 $("#success").show();
-//                 $("#success").html('Data added');
-//             } else if (result.statusCode==201) {
-//                 alert("error occured!");
-//             }
-//         }
-//     });
-// })
-
-// createNewList.addEventListener('click', addNewList);
-
-// function newTask() {              
-    
-//     $.ajax({
-//         type: "POST",  
-//         dataType: "json",  
-//         contentType: "application/json; charset=utf-8",  
-//         url: "DataInsertUseJQuery.aspx/InsertPersonRecord",  
-//         data: "{'Name':'" + Name + "', 'LName':'" + LName + "'}",  
-//         success: function (Record) {  
-                
-//                 $('#txtName').val();  
-//                 $('#txtLastName').val();  
-
-
-//             if (Record.d == true) {  
-            
-//                 $('#Result').text("Your Record insert");  
-//             }  
-//             else {  
-//                 $('#Result').text("Your Record Not Insert");  
-//             }  
-
-//         },  
-//             Error: function (textMsg) {  
-                  
-//                 $('#Result').text("Error: " + Error);  
-//             }  
-//         });  
-//     }  
-//     else {             
-//         $('#Result').html('');  
-//         $('#Result').html(Messege);  
-//     }  
-//     $('#Result').fadeIn();  
-// }
+    // criar um loop para atribuir uma id à task e aos items da task em $_POST;

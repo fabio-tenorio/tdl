@@ -76,13 +76,14 @@ if (!isset($_SESSION['user'])) {
     <main class="tdl_main" id="tdl-area">
         <?php
         foreach($tasks as $value) { ?>
-            <div class="task">
+            <div class="task" id="<?=$value->id;?>">
                 <p class="task-title"><?=$value->title;?></p>
                 <p class="task-desc"><?=$value->description;?></p>
-                <div class="d-flex-row">
+                <div class="container d-flex">
                     <button class="btn col-6 btn-success" type="submit" id="done#<?$value->id;?>">done</button>
                     <button class="btn col-6 btn-danger" type="submit" id="cancel#<?$value->id;?>">cancel</button>
                 </div>
+                <p><?php echo $value->created;?></p>
             </div>
         <?php }
         ?>
