@@ -4,58 +4,107 @@ input para o título e impressão da data corrente
 */
 let xhttp = new XMLHttpRequest();
 let tdlArea = document.getElementById('tdl-area');
+let highestId = 0;
 xhttp.open("GET", "getTasks.php", true);
 xhttp.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
         var allTasks = this.responseText;
         var allTasks = JSON.parse(allTasks);
         for (var i in allTasks) {
-            tdlArea.appendChild('div');
+            let newTask = document.createElement('div');
+            newTask.id = allTasks[i].id;
+            let showDate = document.createElement('p');
+            showDate.id = "taskdate"+allTasks[i].id;
+        
+            newTask.classList.add('task');
+            let taskTitle = document.createElement('input');
+            taskTitle.type = "text";
+            taskTitle.id = "tasktitle";
+            taskTitle.classList.add('task-title');
+            taskTitle.placeholder = allTasks[i].title;
+
+            let taskDesc = document.createElement('textarea');
+            taskDesc.classList.add('task-desc');
+            taskDesc.id = "taskdesc";
+            taskDesc.placeholder = allTasks[i].description;
+
+            let container = document.createElement('div');
+            let taskDone = document.createElement('button');
+            taskDone.type = "submit";
+            taskDone.innerText = "done";
+            taskDone.id = "taskdone"+allTasks[i].id;
+            taskDone.setAttribute("class", "btn col-6 btn-success");
+
+            let taskCancel = document.createElement('button');
+            taskCancel.type = "submit";
+            taskCancel.innerText = "cancel";
+            taskCancel.id = "taskcancel"+allTasks[i].id;
+            taskCancel.setAttribute("class", "btn col-6 btn-danger");
+
+            container.appendChild(taskDone);
+            container.appendChild(taskCancel);
+            tdlArea.appendChild(newTask);
+            newTask.appendChild(taskTitle);
+            newTask.appendChild(taskDesc);
+            newTask.appendChild(container);
+            newTask.appendChild(taskDesc);
+            newTask.appendChild(container);
+            newTask.appendChild(showDate);
+            showDate.innerHTML = allTasks[i].created;
+
+            let done = document.getElementById(taskDone.id).addEventListener("click", (id)=> {
+                let taskDone = new Date();
+                taskDone = taskDone.toISOString().slice(0, 19).replace('T', ' ');
+                $.ajax({
+                    url: "doneTask.php",
+                    type: "POST",
+                    data: {
+                        id: allTasks[i].id,
+                        done: taskDone
+                    },
+                    cache: false,
+                    success: (result) => {
+                        if (result.statusCode == 200) {
+                            $("#success").show();
+                            $("#success").html('Data added');
+                        } else if (result.statusCode == 201) {
+                            alert("error occured!");
+                        }
+                    }
+                });
+            });
+
+            highestId = i;
         }
     }
 }
 xhttp.send();
 
 let createTaskButton = document.getElementById('createNewTask');
-let doneButtons = document.querySelectorAll('.btn-success');
+let doneButtons = document.querySelectorAll('btn-success');
 let saveTask = document.createElement('button');
 
-// function createTask() {
-    
-// }
-
-createTaskButton.addEventListener("click", () => {
-    // $.ajax({
-    //     url: "getTasks.php",
-    //     type: "GET",
-    //     dataType: JSON,
-    //     success: function (data) {
-    //         let allTasks = JSON.parse(data);
-    //         $("#tdl-area").html(data);
-    //     }
-    // })
-    
-    // createTask();
-    
-    let newTask = document.createElement('div');
+function createTask(id) {
+    id += 1;
+    let newTask = document.createElement('div');      
     let showDate = document.createElement('p');
-    showDate.id = "taskdate";
+    showDate.id = "taskdate"+id;
 
     newTask.classList.add('task');
     let taskTitle = document.createElement('input');
     taskTitle.type = "text";
-    taskTitle.id = "tasktitle";
+    taskTitle.id = "tasktitle"+id;
     taskTitle.classList.add('task-title');
     taskTitle.placeholder = "title";
 
     let taskDesc = document.createElement('textarea');
     taskDesc.classList.add('task-desc');
-    taskDesc.id = "taskdesc";
+    taskDesc.id = "taskdesc"+id;
     taskDesc.placeholder = "details";
 
     saveTask.type = "submit";
     saveTask.innerText = "save task";
-    saveTask.id = "savetask";
+    saveTask.id = "savetask"+id;
     saveTask.name = "savetask";
     saveTask.setAttribute("class", "btn col-12 btn-outline-primary");
 
@@ -63,13 +112,13 @@ createTaskButton.addEventListener("click", () => {
     let taskDone = document.createElement('button');
     taskDone.type = "submit";
     taskDone.innerText = "done";
-    taskDone.id = "taskdone";
+    taskDone.id = "taskdone"+id;
     taskDone.setAttribute("class", "btn col-6 btn-success");
 
     let taskCancel = document.createElement('button');
     taskCancel.type = "submit";
     taskCancel.innerText = "cancel";
-    taskCancel.id = "taskcancel";
+    taskCancel.id = "taskcancel"+id;
     taskCancel.setAttribute("class", "btn col-6 btn-danger");
 
     container.appendChild(taskDone);
@@ -77,29 +126,26 @@ createTaskButton.addEventListener("click", () => {
     tdlArea.appendChild(newTask);
     newTask.appendChild(taskTitle);
     newTask.appendChild(taskDesc);
-    newTask.appendChild(saveTask);
     newTask.appendChild(container);
-    newTask.appendChild(taskDesc);
     newTask.appendChild(saveTask);
     newTask.appendChild(container);
     newTask.appendChild(showDate);
-    
+
     let taskDate = new Date();
     taskDate = taskDate.toISOString().slice(0, 19).replace('T', ' ');
-    // let showDate = document.getElementById('taskdate');
     showDate.innerHTML = taskDate;
 
     saveTask.addEventListener("click", function () {
-        var title = $("#tasktitle").val();
-        var desc = $("#taskdesc").val();
-        if ($("#taskdone").val()=="") {
+        var title = $("#tasktitle"+id).val();
+        var desc = $("#taskdesc"+id).val();
+        if ($("#taskdone"+id).val()=="") {
             var done = null;
         } else {
-            var done = $("#taskdone").val();
+            var done = $("#taskdone"+id).val();
         }
         
-        var date = $("#taskdate").val();
-        if (title != '' && desc != '') {
+        var date = $("#taskdate"+id).val();
+        if (title != "" && desc != "") {
             $.ajax({
                 url: "saveTask.php",
                 type: "POST",
@@ -123,8 +169,8 @@ createTaskButton.addEventListener("click", () => {
             alert("all fields must be filled");
         }
     });
+}
+
+createTaskButton.addEventListener("click", () => {
+    createTask(highestId);
 });
-
-     
-
-    // criar um loop para atribuir uma id à task e aos items da task em $_POST;

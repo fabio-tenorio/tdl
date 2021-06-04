@@ -3,12 +3,13 @@ session_start();
 require_once 'db.php';
 
 $id_user = $_SESSION['user']->id;
-$title = $_POST['title'];
-$desc = $_POST['description'];
-$created = $_POST['created'];
+// $title = $_POST['title'];
+// $desc = $_POST['description'];
+// $created = $_POST['created'];
 if ($_POST['done']==='') {
     $done = null;    
 } else {
+    $id = $_POST['id'];
     $done = $_POST['done'];
 }
 
