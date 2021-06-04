@@ -95,6 +95,7 @@ body {
 .tdl_left_aside {
     grid-column: 1 / 2;
     background: chartreuse;
+    min-width: 110px;
 }
 
 .tdl_right_aside {
@@ -117,6 +118,12 @@ body {
     grid-template-columns: repeat(12, fr); */
     min-height: 100vh;
     background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+}
+
+#createNewTask {
+    position: fixed;
+    left: 10px;
+    top: 350px;
 }
 
 .circle {

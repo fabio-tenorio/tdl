@@ -4,6 +4,10 @@ $db = new db;
 if (isset($_POST['signup'])) {
     $db->signUp($_POST);
 }
+
+if ($db->signUp($_POST)) {
+    header ('Location: connexion.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ if (isset($_POST['signup'])) {
 <body>
     <div class="container parent">
         <h1>sign up</h1>
-        <form class="box" method="POST" action="connexion.php">
+        <form class="box" method="POST" action="#">
             <div class="form-item form-group my-2">
                 <label for="name">name</label>
                 <input type="text" id="text" name="name">

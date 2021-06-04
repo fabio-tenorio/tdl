@@ -25,7 +25,7 @@ class db {
 
     public function selectTasks($id)
     {   
-        $sql = $this->connect_db()->prepare("SELECT * FROM `tasks` WHERE id_user=$id");
+        $sql = $this->connect_db()->prepare("SELECT * FROM `tasks` WHERE id_user=$id ORDER BY created");
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }

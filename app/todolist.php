@@ -18,12 +18,14 @@ if (isset($_POST['disconnect'])) {
     header('Location: ../index.php');
 }
 
-if (!isset($_SESSION['user'])) {
-    header('Location: ../index.php');
-} else {
-    $db = new db;
-    $tasks = $db->selectTasks($_SESSION['user']->id);
-}
+// if (!isset($_SESSION['user'])) {
+//     header('Location: ../index.php');
+// } else {
+//     $db = new db;
+//     $tasks = $db->selectTasks($_SESSION['user']->id);
+//     $tasks = json_encode($tasks);
+//     echo $tasks;
+// }
 
 ?>
 
@@ -74,25 +76,13 @@ if (!isset($_SESSION['user'])) {
         <button class="btn btn-primary" id="createNewTask">add new task</button>
     </aside>
     <main class="tdl_main" id="tdl-area">
-        <?php
-        foreach($tasks as $value) { ?>
-            <div class="task" id="<?=$value->id;?>">
-                <p class="task-title"><?=$value->title;?></p>
-                <p class="task-desc"><?=$value->description;?></p>
-                <div class="container d-flex">
-                    <button class="btn col-6 btn-success" type="submit" id="done#<?$value->id;?>">done</button>
-                    <button class="btn col-6 btn-danger" type="submit" id="cancel#<?$value->id;?>">cancel</button>
-                </div>
-                <p><?php echo $value->created;?></p>
-            </div>
-        <?php }
-        ?>
+        <!-- javascript fait son travail ici -->
     </main>
     <aside class="tdl_right_aside mx-3">
         right side
     </aside>
-    <footer class="tdl_footer">
-        footer
+    <footer class="tdl_footer d-flex justify-content-center align-center py-5">
+        Copyright 2021 | Fabio Tenorio de Carvalho
     </footer>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
