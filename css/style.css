@@ -101,6 +101,8 @@ body {
 .tdl_right_aside {
     grid-column: 3 / 4;
     background: cornsilk;
+    display: flex;
+    flex-direction: column;
 }
 
 .tdl_footer {

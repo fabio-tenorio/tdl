@@ -78,8 +78,8 @@ if (isset($_POST['disconnect'])) {
     <main class="tdl_main" id="tdl-area">
         <!-- javascript fait son travail ici -->
     </main>
-    <aside class="tdl_right_aside mx-3">
-        right side
+    <aside id="right-side" class="tdl_right_aside mx-3">
+        
     </aside>
     <footer class="tdl_footer d-flex justify-content-center align-center py-5">
         Copyright 2021 | Fabio Tenorio de Carvalho
