@@ -52,7 +52,12 @@ function showTasks() {
                 newTask.appendChild(taskDesc);
                 newTask.appendChild(container);
                 newTask.appendChild(showDate);
-                showDate.innerHTML = allTasks[i].created;
+                if (allTasks[i].done!=null) {
+                    document.getElementById('right-side').appendChild(document.getElementById(newTask.id));
+                    showDate.innerHTML = "finished at"+"<br>"+allTasks[i].done;
+                } else {
+                    showDate.innerHTML = allTasks[i].created;
+                }
     
                 let done = document.getElementById(taskDone.id).addEventListener("click", (id)=> {
                     let taskDone = new Date();
@@ -192,7 +197,6 @@ function createTask(id) {
                     }
                 }
             });
-            // showTasks();
         } else {
             alert("all fields must be filled");
         }
