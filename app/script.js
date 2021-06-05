@@ -78,7 +78,7 @@ function showTasks() {
                     showDate.innerHTML = "finished at"+"<br>"+taskDone;
                 });
 
-                let done = document.getElementById(taskCancel.id).addEventListener("click", (id)=> {
+                let cancel = document.getElementById(taskCancel.id).addEventListener("click", (id)=> {
                     $.ajax({
                         url: "cancelTask.php",
                         type: "POST",
@@ -95,8 +95,9 @@ function showTasks() {
                             }
                         }
                     });
-                }
-    
+                    console.log($(newTask).css('display', 'none'));
+                });
+
                 highestId = i;
             }
         }
